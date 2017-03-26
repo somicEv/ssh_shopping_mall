@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 配置User表 -->
+	<class name="com.yhh.shop.category.CateGory" table="cateGory">
+		<!-- 配置唯一主键 -->
+		<id name="cid" column="cid">
+			<generator class="native" />
+		</id>
+		
+		<!-- 配置普通属性 -->
+		<property name="cname" column="cname"/>
+		
+		<!-- 配置一级分类与二级分类的映射 -->
+		<set name="secondCateGory" order-by="csid" lazy="false" cascade="delete">
+			<key column="cid"/>
+			<one-to-many class="com.yhh.shop.secondCateGory.SecondCateGory"/>
+		</set>
+	</class>
+	
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 配置Order表 -->
+	<class name="com.yhh.shop.order.Order" table="orders">
+		<!-- 配置唯一主键 -->
+		<id name="oid" column="oid">
+			<generator class="native" />
+		</id>
+		
+		<!-- 配置普通属性 -->
+		<property name="total" column="total"/>
+		<property name="ordertime" column="ordertime"/>
+		<property name="state" column="state"/>
+		<property name="phone" column="phone"/>
+		<property name="addr" column="addr"/>
+		<property name="name" column="name"/>
+		
+		<many-to-one name="user" class="com.yhh.shop.user.User" column="uid" lazy="false"></many-to-one>
+		
+		<!-- 配置Set集合 -->
+		<set name="orderList" cascade="save-update" lazy="false">
+			<key column="oid"/>
+			<one-to-many class="com.yhh.shop.order.OrderItem"/>
+		</set>
+	</class>
+	
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 配置Product表 -->
+	<class name="com.yhh.shop.product.Product" table="product">
+		<!-- 配置唯一主键 -->
+		<id name="pid" column="pid">
+			<generator class="native" />
+		</id>
+		
+		<!-- 配置普通属性 -->
+		<property name="pname" column="pname"/>
+		<property name="market_price" column="market_price"/>
+		<property name="shop_price" column="shop_price"/>
+		<property name="image" column="image"/>
+		<property name="pdesc" column="pdesc"/>
+		<property name="is_hot" column="is_hot"/>
+		<property name="pdate" column="pdate"/>
+	
+		<!-- 配置二级分类的外键 -->
+		<many-to-one name="secondCateGory" column="csid" class="com.yhh.shop.secondCateGory.SecondCateGory" />
+		
+	</class>
+	
+</hibernate-mapping>

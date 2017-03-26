@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true"/>
+
+    <package name="default" namespace="/" extends="struts-default">
+    	<!-- 跳转到首页 -->
+    	<action name="index" class="indexAction">
+    		<result name="indexSuccess">/WEB-INF/jsp/index.jsp</result>	
+    	</action>
+    	
+    	<!-- 配置用户Action -->
+    	<action name="user_*" class="userAction"  method="{1}">
+    		<!-- 用户注册 -->
+    		<result name="registPageSuccess">/WEB-INF/jsp/user_registPage.jsp</result>
+    		<result name="registSuccess">/WEB-INF/jsp/msg.jsp</result>
+    		<result name="registInput">/WEB-INF/jsp/user_registPage.jsp</result>
+    		
+    		<!-- 用户激活 -->
+    		<result name="activeSuccess">/WEB-INF/jsp/msg.jsp</result>
+    		<result name="activeInput">/WEB-INF/jsp/msg.jsp</result>
+    		
+    		<!-- 用户登录 -->
+    		<result name="loginPageSuccess">/WEB-INF/jsp/user_loginPage.jsp</result>
+    		<result name="loginInput">/WEB-INF/jsp/user_loginPage.jsp</result>
+    		<result name="loginSuccess" type="redirectAction">index</result>
+    	
+    		<result name="exitSuccess" type="redirectAction">index</result>
+    		
+    		<result name="msg">/WEB-INF/jsp/msg.jsp</result>
+    	</action>
+    	
+    	<!-- 生成验证码Action -->
+    	<action name="checkImgAction" class="checkImgAction"></action>
+	
+		<!-- 配置商品的Action -->
+		<action name="product_*" class="productAction" method="{1}">
+			<result name="findByCidSuccess">/WEB-INF/jsp/list.jsp</result>
+			<result name="findByPidSuccess">/WEB-INF/jsp/cateGory.jsp</result>
+			<result name="findByCsidSuccess">/WEB-INF/jsp/cslist.jsp</result>
+			<result name="adminFindAllSuccess">/admin/product/list.jsp</result>
+			<result name="addPageSuccess">/admin/product/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">product_adminFindAll?page=1</result>
+		</action>   
+		
+		<!-- 配置购物车的Action -->
+		<action name="cart_*" class="cartAction" method="{1}">
+			<result name="addItemSuccess">/WEB-INF/jsp/cart.jsp</result>
+			<result name="clearCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+			<result name="removeCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+			<result name="myCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+		</action> 
+		
+		<!-- 配置订单的Action -->
+		<action name="order_*" class="orderAction" method="{1}">
+			<result name="saveOrderMessage">/WEB-INF/jsp/msg.jsp</result>
+			<result name="loginuserMessage">/WEB-INF/jsp/msg.jsp</result>
+			<result name="saveOrderSuccess">/WEB-INF/jsp/Order.jsp</result>
+			<result name="callBackSuccess">/WEB-INF/jsp/msg.jsp</result>
+			<result name="findByUidSuccess">/WEB-INF/jsp/orderList.jsp</result>
+			<result name="findByOidSuccess">/WEB-INF/jsp/Order.jsp</result>
+			<result name="adminFindAllSuccess">/admin/order/list.jsp</result>
+			<result name="updateStateSuccess" type="redirectAction">order_findByUid.action</result>
+			<result name="adminUpdateStateSuccess" type="redirectAction">order_adminFindAll.action?page=1</result>
+		</action>	
+		
+		<!-- 后台登录的Action -->
+		<action name="admin_*" class="adminUserAction" method="{1}">
+			<result name="loginSuccess">/admin/home.jsp</result>
+			<result name="loginInput">/admin/index.jsp</result>
+		</action>
+		
+		<!-- 查询一级分类的Action -->
+		<action name="category_*" class="cateGoryAction" method="{1}">
+			<result name="adminFindAllSuccess">/admin/category/list.jsp</result>
+			<result name="adminSaveCateGorySuccess" type="redirectAction">category_adminFindAll</result>
+			<result name="adminDeleteSuccess" type="redirectAction">category_adminFindAll</result>
+			<result name="adminEditSuccess">/admin/category/edit.jsp</result>
+			<result name="adminUpdateSuccess" type="redirectAction">category_adminFindAll</result>
+		</action>
+		
+		<!-- 二级分类的Action -->
+		<action name="categorySecond_*" class="secondCateGoryAction" method="{1}">
+			<result name="adminFindAllSuccess">/admin/categorysecond/list.jsp</result>
+			<result name="addPageSuccess">/admin/categorysecond/add.jsp</result>
+			<result name="saveSuccess" type="redirectAction">categorySecond_adminFindAll?page=1</result>
+			<result name="editSuccess">/admin/categorysecond/edit.jsp</result>
+			<result name="updateSuccess" type="redirectAction">categorySecond_adminFindAll?page=1</result>
+		</action>
+    </package>
+
+</struts>
